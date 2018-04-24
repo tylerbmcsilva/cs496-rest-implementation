@@ -3,3 +3,6 @@ runtime: nodejs
 
 skip_files:
 - package-lock.json
+
+env_variables:
+  PROJECT_ID: "restimplementation-202104"
