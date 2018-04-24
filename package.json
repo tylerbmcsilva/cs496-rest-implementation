@@ -1,0 +1,21 @@
+{
+  "name": "REST_Implementation",
+  "description": "Assignment for CS496",
+  "version": "0.0.1",
+  "author": "Tyler McSilva",
+  "main": "index.js",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "deploy": "gcloud app deploy",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@google-cloud/datastore": "1.1.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {}
+}
