@@ -1,13 +1,18 @@
 'use strict';
-
-const bodyParser  = require('body-parser');
 const Datastore   = require('@google-cloud/datastore');
 const express     = require('express');
 
 
 const app = express();
 app.enable('trust proxy');
-app.use(bodyParser);
+
+
+app.use(require('./routes'));
+
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 
 const PORT = process.env.PORT || 8080;
