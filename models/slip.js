@@ -10,3 +10,71 @@ const db  = require('./index');
 // }
 
 const KIND = 'slip';
+
+
+async function getAllSlips() {
+  try {
+    return await db.getAllOfKind(KIND);
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function createSlip({ number }) {
+  try {
+    const data = {
+      number,
+      current_boat: '',
+      arrival_date: '',
+      departure_history: []
+    };
+
+    return await db.createEntity({ KIND, data });
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function getSlip({ id }){
+  try {
+    return await db.getEntityById({ KIND, id });
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function updateSlip({ id, number, current_boat, arrival_date, departure_history }) {
+  try {
+    const data = {
+        number,
+        current_boat,
+        arrival_date,
+        departure_history
+    };
+
+    return await db.updateEntity({ KIND, id, data });
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function deleteSlip({ id }) {
+  try {
+    return await db.deleteEntity({ KIND, id });
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+module.exports = {
+  getAllSlips,
+  createSlip,
+  getSlip,
+  updateSlip,
+  deleteSlip
+}

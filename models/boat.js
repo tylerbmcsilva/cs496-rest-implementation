@@ -13,16 +13,7 @@ const KIND = 'boat';
 
 async function getAllBoats() {
   try {
-    const query = db.createQuery(KIND);
-
-    const response = await query.run();
-
-    const boats = response[0].map( (boat) => {
-      boat.id = boat[db.KEY].id;
-      return boat;
-    });
-
-    return boats;
+    return await db.getAllOfKind(KIND);
   } catch (error) {
     throw error;
   }
@@ -31,45 +22,58 @@ async function getAllBoats() {
 
 async function createBoat({ name, type, length }) {
   try {
-    const key = db.key(KIND);
-    const boat = {
-      key,
-      data: {
-        name,
-        type,
-        length,
-        at_sea: false
-      }
+    const data = {
+      name,
+      type,
+      length,
+      at_sea: false
     };
 
-    await db.save(boat);
-
-    return key.path[1];
+    return await db.createEntity({ KIND, data });
   } catch (error) {
     throw error;
   }
 }
+
 
 async function getBoat({ id }){
   try {
-    const key       = await db.key([KIND, id]);
-    const response  = await db.get(key);
-
-    const boat = response[0];
-
-    if( boat ){
-      boat.id = boat[db.KEY].id;
-      return boat;
-    } else {
-      return null;
-    }
+    return await db.getEntityById({ KIND, id });
   } catch (error) {
     throw error;
   }
 }
+
+
+async function updateBoat({ id, name, type, length, at_sea }) {
+  try {
+    const data = {
+        name,
+        type,
+        length,
+        at_sea
+    };
+
+    return await db.updateEntity({ KIND, id, data });
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function deleteBoat({ id }) {
+  try {
+    return await db.deleteEntity({ KIND, id });
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 module.exports = {
   getAllBoats,
   createBoat,
-  getBoat
+  getBoat,
+  updateBoat,
+  deleteBoat
 }

@@ -1,8 +1,18 @@
 const Boat        = require('../../models/boat');
 const { Router }  = require('express');
 
+
 const router = new Router();
 module.exports = router;
+
+
+function payloadHasId(err, req, res, next) {
+  if(req.body.id)
+    next();
+  else
+    next(err);
+}
+
 
 router.get('/boat', async function(req, res) {
   try {
@@ -14,6 +24,7 @@ router.get('/boat', async function(req, res) {
     res.send('Internal Error');
   }
 });
+
 
 router.post('/boat', async function(req, res) {
   const { name, type, length } = req.body;
@@ -27,6 +38,7 @@ router.post('/boat', async function(req, res) {
   }
 });
 
+
 router.get('/boat/:boatid', async function(req, res) {
   const { boatid } = req.params;
 
@@ -38,10 +50,32 @@ router.get('/boat/:boatid', async function(req, res) {
     res.status(404).send('Not Found');
 });
 
-router.patch('/boat/:boatid', (req, res) => {
-  res.send('PATCH SPECIFIC BOAT');
+
+router.patch('/boat/:boatid', payloadHasId, async function(req, res) {
+  const { boatid } = req.params;
+  const { number, current_boat, arrival_date, departure_history } = req.body;
+
+  const boatId = await Boat.updateBoat({
+    id: parseInt(boatid),
+    name,
+    type,
+    length,
+    at_sea
+  });
+
+  if ( boatId )
+    res.status(202).json({ id: boatId });
+  else
+    res.status(404).send('Not Found');
 });
 
-router.delete('/boat/:boatid', (req, res) => {
-  res.send('DELETE SPECIFIC BOAT');
+
+router.delete('/boat/:boatid', async function(req, res) {
+  const { boatid } = req.params;
+  try {
+    await Boat.deleteBoat({ id: parseInt(boatid) })
+    res.status(204).send();
+  } catch (error) {
+    res.status(404).send('Not Found');
+  }
 });
