@@ -1,14 +1,14 @@
 {
-	"id": "1da9cab1-2dff-4fec-9411-59753bca8bc6",
+	"id": "67d65d2b-12f6-4b1c-a12e-9452c043b338",
 	"name": "REST Implementation Test Suite",
 	"allTests": [],
-	"timestamp": "2018-04-28T22:45:57.836Z",
+	"timestamp": "2018-04-28T23:43:36.296Z",
 	"collection_id": "3d45ec6f-207d-4fd4-b70d-036ca829fd7a",
 	"folder_id": 0,
 	"target_type": "collection",
 	"environment_id": "0",
 	"data": [],
-	"delay": 5000,
+	"delay": 1000,
 	"count": 1,
 	"collection": {
 		"id": "3d45ec6f-207d-4fd4-b70d-036ca829fd7a",
@@ -79,31 +79,31 @@
 	"globals": [
 		{
 			"key": "testBoat",
-			"value": "{\"name\":\"TestBoat\",\"type\":\"Skipper\",\"at_sea\":true,\"length\":100,\"id\":\"5691726094139392\"}",
+			"value": "{\"type\":\"Skipper\",\"at_sea\":true,\"length\":100,\"name\":\"TestBoat\",\"id\":\"5719378301550592\"}",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testSlip",
-			"value": "{\"number\":123456,\"current_boat\":\"\",\"arrival_date\":\"\",\"departure_history\":[],\"id\":\"5733935958982656\"}",
+			"value": "{\"number\":123456,\"current_boat\":\"\",\"arrival_date\":\"\",\"departure_history\":[],\"id\":\"5690145009303552\"}",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testSlipId",
-			"value": "5733935958982656",
+			"value": "5690145009303552",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testBoatId",
-			"value": "5691726094139392",
+			"value": "5719378301550592",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testDockSlip",
-			"value": "5733935958982656",
+			"value": "5154321532452864",
 			"enabled": true,
 			"type": "text"
 		}
@@ -143,7 +143,7 @@
 				}
 			},
 			"times": [
-				"988"
+				"1270"
 			],
 			"allTests": [
 				{
@@ -152,8 +152,8 @@
 					"Should return Array in JSON body": true
 				}
 			],
-			"time": "988",
-			"totalRequestTime": "988",
+			"time": "1270",
+			"totalRequestTime": "1270",
 			"iterationResults": {}
 		},
 		{
@@ -190,7 +190,7 @@
 				}
 			},
 			"times": [
-				"544"
+				"1567"
 			],
 			"allTests": [
 				{
@@ -199,8 +199,8 @@
 					"Should return id of created boat": true
 				}
 			],
-			"time": "544",
-			"totalRequestTime": "544",
+			"time": "1567",
+			"totalRequestTime": "1567",
 			"iterationResults": {}
 		},
 		{
@@ -237,7 +237,7 @@
 				}
 			},
 			"times": [
-				"364"
+				"267"
 			],
 			"allTests": [
 				{
@@ -246,14 +246,14 @@
 					"Should return error in JSON body": true
 				}
 			],
-			"time": "364",
-			"totalRequestTime": "364",
+			"time": "267",
+			"totalRequestTime": "267",
 			"iterationResults": {}
 		},
 		{
-			"name": "GET /boat/{boatid}",
+			"name": "GET /boat/{boatid} - Success",
 			"id": "19cd51db-6c9b-4191-913e-ea454cc52984",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -284,7 +284,7 @@
 				}
 			},
 			"times": [
-				"890"
+				"1515"
 			],
 			"allTests": [
 				{
@@ -293,14 +293,61 @@
 					"Should return Boat in JSON body": true
 				}
 			],
-			"time": "890",
-			"totalRequestTime": "890",
+			"time": "1515",
+			"totalRequestTime": "1515",
 			"iterationResults": {}
 		},
 		{
-			"name": "PATCH /boat/{boatid}",
+			"name": "GET /boat/{boatid} - Error",
+			"id": "a38b5072-b87f-480d-a4f6-b5182c54d7cb",
+			"url": "https://restimplementation-202104.appspot.com/boat/1",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Response is 404",
+				"status": "pass",
+				"Should return JSON body": true,
+				"Should return error in JSON body": true
+			},
+			"testPassFailCounts": {
+				"Response is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"884"
+			],
+			"allTests": [
+				{
+					"Response is 404": true,
+					"Should return JSON body": true,
+					"Should return error in JSON body": true
+				}
+			],
+			"time": "884",
+			"totalRequestTime": "884",
+			"iterationResults": {}
+		},
+		{
+			"name": "PATCH /boat/{boatid} - Success",
 			"id": "e8e7010e-b0ae-45e6-a6ca-4c6b7f57ffa8",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -331,7 +378,7 @@
 				}
 			},
 			"times": [
-				"464"
+				"384"
 			],
 			"allTests": [
 				{
@@ -340,14 +387,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "464",
-			"totalRequestTime": "464",
+			"time": "384",
+			"totalRequestTime": "384",
 			"iterationResults": {}
 		},
 		{
 			"name": "PATCH /boat/{boatid} - Verifying Change",
 			"id": "6f12fd11-baa9-485d-89f0-c3d06a93d9f7",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -383,7 +430,7 @@
 				}
 			},
 			"times": [
-				"225"
+				"1407"
 			],
 			"allTests": [
 				{
@@ -393,8 +440,55 @@
 					"Should have updated values": true
 				}
 			],
-			"time": "225",
-			"totalRequestTime": "225",
+			"time": "1407",
+			"totalRequestTime": "1407",
+			"iterationResults": {}
+		},
+		{
+			"name": "PATCH /boat/{boatid} - Error",
+			"id": "6827ff88-2262-4ff4-b659-3eb47ba71faa",
+			"url": "https://restimplementation-202104.appspot.com/boat/1",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Response is 404",
+				"status": "pass",
+				"Should return JSON body": true,
+				"Should return error in JSON body": true
+			},
+			"testPassFailCounts": {
+				"Response is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"4586"
+			],
+			"allTests": [
+				{
+					"Response is 404": true,
+					"Should return JSON body": true,
+					"Should return error in JSON body": true
+				}
+			],
+			"time": "4586",
+			"totalRequestTime": "4586",
 			"iterationResults": {}
 		},
 		{
@@ -431,7 +525,7 @@
 				}
 			},
 			"times": [
-				"325"
+				"260"
 			],
 			"allTests": [
 				{
@@ -440,8 +534,8 @@
 					"Should return Array in JSON body": true
 				}
 			],
-			"time": "325",
-			"totalRequestTime": "325",
+			"time": "260",
+			"totalRequestTime": "260",
 			"iterationResults": {}
 		},
 		{
@@ -478,7 +572,7 @@
 				}
 			},
 			"times": [
-				"378"
+				"406"
 			],
 			"allTests": [
 				{
@@ -487,8 +581,8 @@
 					"Should return id of created boat": true
 				}
 			],
-			"time": "378",
-			"totalRequestTime": "378",
+			"time": "406",
+			"totalRequestTime": "406",
 			"iterationResults": {}
 		},
 		{
@@ -525,7 +619,7 @@
 				}
 			},
 			"times": [
-				"397"
+				"272"
 			],
 			"allTests": [
 				{
@@ -534,14 +628,14 @@
 					"Should return error in JSON body": true
 				}
 			],
-			"time": "397",
-			"totalRequestTime": "397",
+			"time": "272",
+			"totalRequestTime": "272",
 			"iterationResults": {}
 		},
 		{
-			"name": "GET /slip/{slipid}",
+			"name": "GET /slip/{slipid} - Success",
 			"id": "2cd5560b-3c91-4ad1-95c3-cb6b52cf334d",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -572,7 +666,7 @@
 				}
 			},
 			"times": [
-				"1213"
+				"283"
 			],
 			"allTests": [
 				{
@@ -581,14 +675,61 @@
 					"Should return Slip in JSON body": true
 				}
 			],
-			"time": "1213",
-			"totalRequestTime": "1213",
+			"time": "283",
+			"totalRequestTime": "283",
 			"iterationResults": {}
 		},
 		{
-			"name": "PATCH /slip/{slipid}",
+			"name": "GET /slip/{slipid} - Error",
+			"id": "2c3272aa-267e-4db0-8d01-6e9ee508bc70",
+			"url": "https://restimplementation-202104.appspot.com/slip/1",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Response is 404",
+				"status": "pass",
+				"Should return JSON body": true,
+				"Should return error in JSON body": true
+			},
+			"testPassFailCounts": {
+				"Response is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"388"
+			],
+			"allTests": [
+				{
+					"Response is 404": true,
+					"Should return JSON body": true,
+					"Should return error in JSON body": true
+				}
+			],
+			"time": "388",
+			"totalRequestTime": "388",
+			"iterationResults": {}
+		},
+		{
+			"name": "PATCH /slip/{slipid} - Success",
 			"id": "0d37c9e3-ab2d-4f8e-bec5-43778a321239",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -619,7 +760,7 @@
 				}
 			},
 			"times": [
-				"327"
+				"3168"
 			],
 			"allTests": [
 				{
@@ -628,14 +769,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "327",
-			"totalRequestTime": "327",
+			"time": "3168",
+			"totalRequestTime": "3168",
 			"iterationResults": {}
 		},
 		{
 			"name": "PATCH /slip/{slipid} - Verifying Change",
 			"id": "9b29c4b3-d0dc-4abc-9295-9c78fc8fdd2b",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -671,7 +812,7 @@
 				}
 			},
 			"times": [
-				"273"
+				"276"
 			],
 			"allTests": [
 				{
@@ -681,14 +822,61 @@
 					"Should have updated values": true
 				}
 			],
-			"time": "273",
-			"totalRequestTime": "273",
+			"time": "276",
+			"totalRequestTime": "276",
+			"iterationResults": {}
+		},
+		{
+			"name": "PATCH /slip/{slipid} - Error",
+			"id": "b859278e-7690-4895-8929-231766b7ff9e",
+			"url": "https://restimplementation-202104.appspot.com/slip/1",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"name": "Response is 400",
+				"status": "pass",
+				"Should return JSON body": true,
+				"Should return error in JSON body": true
+			},
+			"testPassFailCounts": {
+				"Response is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"282"
+			],
+			"allTests": [
+				{
+					"Response is 400": true,
+					"Should return JSON body": true,
+					"Should return error in JSON body": true
+				}
+			],
+			"time": "282",
+			"totalRequestTime": "282",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/arrive",
 			"id": "d5f41b11-dde6-45c6-92af-b345f2145ef5",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/arrive",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -719,7 +907,7 @@
 				}
 			},
 			"times": [
-				"883"
+				"495"
 			],
 			"allTests": [
 				{
@@ -728,14 +916,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "883",
-			"totalRequestTime": "883",
+			"time": "495",
+			"totalRequestTime": "495",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "8c9c277f-666b-469e-9e2b-6ae27b3ed789",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -771,7 +959,7 @@
 				}
 			},
 			"times": [
-				"133"
+				"288"
 			],
 			"allTests": [
 				{
@@ -781,14 +969,61 @@
 					"Should have current_boat as test boat": true
 				}
 			],
-			"time": "133",
-			"totalRequestTime": "133",
+			"time": "288",
+			"totalRequestTime": "288",
+			"iterationResults": {}
+		},
+		{
+			"name": "PUT /boat/{boatid}/arrive - Error",
+			"id": "1ac09d95-34b0-461c-bd06-605abc0bd8b0",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/arrive",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"tests": {
+				"name": "Response is 401",
+				"status": "pass",
+				"Should return JSON body": true,
+				"Should return error in JSON body": true
+			},
+			"testPassFailCounts": {
+				"Response is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"290"
+			],
+			"allTests": [
+				{
+					"Response is 401": true,
+					"Should return JSON body": true,
+					"Should return error in JSON body": true
+				}
+			],
+			"time": "290",
+			"totalRequestTime": "290",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "5567baf1-dcaa-41ed-a6f6-316bb806bb56",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/depart",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -819,7 +1054,7 @@
 				}
 			},
 			"times": [
-				"1138"
+				"497"
 			],
 			"allTests": [
 				{
@@ -828,14 +1063,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "1138",
-			"totalRequestTime": "1138",
+			"time": "497",
+			"totalRequestTime": "497",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "32d5e9e4-ea8c-477b-9ada-b44227884e84",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -877,7 +1112,7 @@
 				}
 			},
 			"times": [
-				"277"
+				"292"
 			],
 			"allTests": [
 				{
@@ -888,14 +1123,61 @@
 					"Should have test boat in departure history": true
 				}
 			],
-			"time": "277",
-			"totalRequestTime": "277",
+			"time": "292",
+			"totalRequestTime": "292",
+			"iterationResults": {}
+		},
+		{
+			"name": "PUT /boat/{boatid}/depart - Error",
+			"id": "90b8cb14-7f8f-4674-8b2c-fbf488426179",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/depart",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"tests": {
+				"name": "Response is 401",
+				"status": "pass",
+				"Should return JSON body": true,
+				"Should return error in JSON body": true
+			},
+			"testPassFailCounts": {
+				"Response is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"107"
+			],
+			"allTests": [
+				{
+					"Response is 401": true,
+					"Should return JSON body": true,
+					"Should return error in JSON body": true
+				}
+			],
+			"time": "107",
+			"totalRequestTime": "107",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/arrive/{slipid}",
 			"id": "9a3cc6e1-e944-4e89-98e5-ecd01f0cb6f4",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/arrive/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -926,7 +1208,7 @@
 				}
 			},
 			"times": [
-				"476"
+				"459"
 			],
 			"allTests": [
 				{
@@ -935,14 +1217,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "476",
-			"totalRequestTime": "476",
+			"time": "459",
+			"totalRequestTime": "459",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "e9a81c60-70dd-4a08-a205-62712dafc67c",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -978,7 +1260,7 @@
 				}
 			},
 			"times": [
-				"220"
+				"293"
 			],
 			"allTests": [
 				{
@@ -988,14 +1270,14 @@
 					"Should have current_boat as test boat": true
 				}
 			],
-			"time": "220",
-			"totalRequestTime": "220",
+			"time": "293",
+			"totalRequestTime": "293",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "23c8cbcc-3716-44fe-b0d5-2fb6b767d1a6",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/depart",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -1026,7 +1308,7 @@
 				}
 			},
 			"times": [
-				"947"
+				"395"
 			],
 			"allTests": [
 				{
@@ -1035,14 +1317,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "947",
-			"totalRequestTime": "947",
+			"time": "395",
+			"totalRequestTime": "395",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "0af9ca76-fa7d-4cbd-9ce2-578a18bfa0c1",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -1084,7 +1366,7 @@
 				}
 			},
 			"times": [
-				"277"
+				"283"
 			],
 			"allTests": [
 				{
@@ -1095,14 +1377,14 @@
 					"Should have test boat in departure history": true
 				}
 			],
-			"time": "277",
-			"totalRequestTime": "277",
+			"time": "283",
+			"totalRequestTime": "283",
 			"iterationResults": {}
 		},
 		{
 			"name": "DELETE /boat/{boatid}",
 			"id": "c37494c2-6ce7-4ba2-802c-a6a5830743dc",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -1133,7 +1415,7 @@
 				}
 			},
 			"times": [
-				"1128"
+				"378"
 			],
 			"allTests": [
 				{
@@ -1142,14 +1424,14 @@
 					"Should return message in JSON body": true
 				}
 			],
-			"time": "1128",
-			"totalRequestTime": "1128",
+			"time": "378",
+			"totalRequestTime": "378",
 			"iterationResults": {}
 		},
 		{
 			"name": "DELETE /slip/{slipid}",
 			"id": "4e0a7646-1ff2-41bb-b9c2-6d39c167a031",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -1180,7 +1462,7 @@
 				}
 			},
 			"times": [
-				"333"
+				"196"
 			],
 			"allTests": [
 				{
@@ -1189,21 +1471,21 @@
 					"Should return message in JSON body": true
 				}
 			],
-			"time": "333",
-			"totalRequestTime": "333",
+			"time": "196",
+			"totalRequestTime": "196",
 			"iterationResults": {}
 		}
 	],
-	"totalPass": 80,
+	"totalPass": 98,
 	"totalFail": 0,
-	"totalTime": 12200,
+	"totalTime": 21188,
 	"lifecycle": "done",
 	"requests": [
 		{
 			"name": "GET /boat",
 			"id": "ec7f0d2b-66e1-4756-8c73-1dc28f178bff",
 			"url": "https://restimplementation-202104.appspot.com/boat",
-			"time": "2018-04-28T22:45:57.836Z",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1231,7 +1513,7 @@
 			"name": "POST /boat - Success",
 			"id": "bf5ed0d8-0452-46fb-aee9-6d1babf21a59",
 			"url": "https://restimplementation-202104.appspot.com/boat",
-			"time": "2018-04-28T22:45:57.836Z",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 201,
 				"name": "Created",
@@ -1259,7 +1541,7 @@
 			"name": "POST /boat - Error",
 			"id": "45293e90-fe40-46e5-8d0c-722fa0a81069",
 			"url": "https://restimplementation-202104.appspot.com/boat",
-			"time": "2018-04-28T22:45:57.836Z",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request",
@@ -1284,10 +1566,10 @@
 			}
 		},
 		{
-			"name": "GET /boat/{boatid}",
+			"name": "GET /boat/{boatid} - Success",
 			"id": "19cd51db-6c9b-4191-913e-ea454cc52984",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1312,10 +1594,38 @@
 			}
 		},
 		{
-			"name": "PATCH /boat/{boatid}",
+			"name": "GET /boat/{boatid} - Error",
+			"id": "a38b5072-b87f-480d-a4f6-b5182c54d7cb",
+			"url": "https://restimplementation-202104.appspot.com/boat/1",
+			"time": "2018-04-28T23:43:36.296Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Response is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "PATCH /boat/{boatid} - Success",
 			"id": "e8e7010e-b0ae-45e6-a6ca-4c6b7f57ffa8",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1342,8 +1652,8 @@
 		{
 			"name": "PATCH /boat/{boatid} - Verifying Change",
 			"id": "6f12fd11-baa9-485d-89f0-c3d06a93d9f7",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1372,10 +1682,38 @@
 			}
 		},
 		{
+			"name": "PATCH /boat/{boatid} - Error",
+			"id": "6827ff88-2262-4ff4-b659-3eb47ba71faa",
+			"url": "https://restimplementation-202104.appspot.com/boat/1",
+			"time": "2018-04-28T23:43:36.296Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Response is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
 			"name": "GET /slip",
 			"id": "e04880d4-cce1-4b00-801c-07976bdad117",
 			"url": "https://restimplementation-202104.appspot.com/slip",
-			"time": "2018-04-28T22:45:57.836Z",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1403,7 +1741,7 @@
 			"name": "POST /slip - Success",
 			"id": "f26a58c2-e99d-422e-900f-87e7bf62b148",
 			"url": "https://restimplementation-202104.appspot.com/slip",
-			"time": "2018-04-28T22:45:57.836Z",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 201,
 				"name": "Created",
@@ -1431,7 +1769,7 @@
 			"name": "POST /slip - Error",
 			"id": "0c70d557-9776-4a6d-9970-f3ea8b7b4560",
 			"url": "https://restimplementation-202104.appspot.com/slip",
-			"time": "2018-04-28T22:45:57.836Z",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request",
@@ -1456,10 +1794,10 @@
 			}
 		},
 		{
-			"name": "GET /slip/{slipid}",
+			"name": "GET /slip/{slipid} - Success",
 			"id": "2cd5560b-3c91-4ad1-95c3-cb6b52cf334d",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1484,10 +1822,38 @@
 			}
 		},
 		{
-			"name": "PATCH /slip/{slipid}",
+			"name": "GET /slip/{slipid} - Error",
+			"id": "2c3272aa-267e-4db0-8d01-6e9ee508bc70",
+			"url": "https://restimplementation-202104.appspot.com/slip/1",
+			"time": "2018-04-28T23:43:36.296Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Response is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "PATCH /slip/{slipid} - Success",
 			"id": "0d37c9e3-ab2d-4f8e-bec5-43778a321239",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1514,8 +1880,8 @@
 		{
 			"name": "PATCH /slip/{slipid} - Verifying Change",
 			"id": "9b29c4b3-d0dc-4abc-9295-9c78fc8fdd2b",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1544,10 +1910,38 @@
 			}
 		},
 		{
+			"name": "PATCH /slip/{slipid} - Error",
+			"id": "b859278e-7690-4895-8929-231766b7ff9e",
+			"url": "https://restimplementation-202104.appspot.com/slip/1",
+			"time": "2018-04-28T23:43:36.296Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Response is 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
 			"name": "PUT /boat/{boatid}/arrive",
 			"id": "d5f41b11-dde6-45c6-92af-b345f2145ef5",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/arrive",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1574,8 +1968,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "8c9c277f-666b-469e-9e2b-6ae27b3ed789",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1604,10 +1998,38 @@
 			}
 		},
 		{
+			"name": "PUT /boat/{boatid}/arrive - Error",
+			"id": "1ac09d95-34b0-461c-bd06-605abc0bd8b0",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/arrive",
+			"time": "2018-04-28T23:43:36.296Z",
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"testPassFailCounts": {
+				"Response is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "5567baf1-dcaa-41ed-a6f6-316bb806bb56",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/depart",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1634,8 +2056,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "32d5e9e4-ea8c-477b-9ada-b44227884e84",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1668,10 +2090,38 @@
 			}
 		},
 		{
+			"name": "PUT /boat/{boatid}/depart - Error",
+			"id": "90b8cb14-7f8f-4674-8b2c-fbf488426179",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/depart",
+			"time": "2018-04-28T23:43:36.296Z",
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"testPassFailCounts": {
+				"Response is 401": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should return error in JSON body": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
 			"name": "PUT /boat/{boatid}/arrive/{slipid}",
 			"id": "9a3cc6e1-e944-4e89-98e5-ecd01f0cb6f4",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/arrive/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1698,8 +2148,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "e9a81c60-70dd-4a08-a205-62712dafc67c",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1730,8 +2180,8 @@
 		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "23c8cbcc-3716-44fe-b0d5-2fb6b767d1a6",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504/depart",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1758,8 +2208,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "0af9ca76-fa7d-4cbd-9ce2-578a18bfa0c1",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1794,8 +2244,8 @@
 		{
 			"name": "DELETE /boat/{boatid}",
 			"id": "c37494c2-6ce7-4ba2-802c-a6a5830743dc",
-			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5637489247125504",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1822,8 +2272,8 @@
 		{
 			"name": "DELETE /slip/{slipid}",
 			"id": "4e0a7646-1ff2-41bb-b9c2-6d39c167a031",
-			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
-			"time": "2018-04-28T22:45:57.836Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5704147139559424",
+			"time": "2018-04-28T23:43:36.296Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",

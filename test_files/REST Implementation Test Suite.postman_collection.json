@@ -155,7 +155,7 @@
 					"response": []
 				},
 				{
-					"name": "GET /boat/{boatid}",
+					"name": "GET /boat/{boatid} - Success",
 					"event": [
 						{
 							"listen": "test",
@@ -204,7 +204,50 @@
 					"response": []
 				},
 				{
-					"name": "PATCH /boat/{boatid}",
+					"name": "GET /boat/{boatid} - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "230a24ce-fe18-441f-bf28-20384ecad0e4",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 404', function(){",
+									"    pm.response.to.have.status(404);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('error');",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/boat/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /boat/{boatid} - Success",
 					"event": [
 						{
 							"listen": "test",
@@ -311,6 +354,58 @@
 							"path": [
 								"boat",
 								"{{testBoatId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /boat/{boatid} - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7cbcf0a8-70d3-4163-9433-9e82ecd02162",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 404', function(){",
+									"    pm.response.to.have.status(404);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('error');",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TestBoat\",\n    \"type\": \"Cruiser\",\n    \"at_sea\": true,\n    \"length\": 120,\n    \"id\": \"5638830484881408\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"1"
 							]
 						}
 					},
@@ -468,7 +563,7 @@
 					"response": []
 				},
 				{
-					"name": "GET /slip/{slipid}",
+					"name": "GET /slip/{slipid} - Success",
 					"event": [
 						{
 							"listen": "test",
@@ -517,7 +612,50 @@
 					"response": []
 				},
 				{
-					"name": "PATCH /slip/{slipid}",
+					"name": "GET /slip/{slipid} - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "862a65e2-ef5b-4758-a0d9-b7856602485c",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 404', function(){",
+									"    pm.response.to.have.status(404);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('error');",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /slip/{slipid} - Success",
 					"event": [
 						{
 							"listen": "test",
@@ -624,6 +762,58 @@
 							"path": [
 								"slip",
 								"{{testSlipId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /slip/{slipid} - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a874c827-1ec3-49a3-ad48-e2b3ec9b7302",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 400', function(){",
+									"    pm.response.to.have.status(400);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('error');",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrival_date\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/slip/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"1"
 							]
 						}
 					},
@@ -739,6 +929,58 @@
 							"path": [
 								"slip",
 								"{{testDockSlip}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /boat/{boatid}/arrive - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "409f6458-fa5d-4291-b648-73bce4741499",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 401', function(){",
+									"    pm.response.to.have.status(401);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('error');",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrival_date\": \"\",\n    \"departure_history\": [],\n    \"number\": 54321,\n    \"current_boat\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}/arrive",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}",
+								"arrive"
 							]
 						}
 					},
@@ -870,6 +1112,60 @@
 							"path": [
 								"slip",
 								"{{testDockSlip}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /boat/{boatid}/depart - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ec74c62d-0394-4284-b1bc-13ec3c4bdfbe",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 401', function(){",
+									"    pm.response.to.have.status(401);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('error');",
+									"});",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}/depart",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}",
+								"depart"
 							]
 						}
 					},
@@ -1235,21 +1531,21 @@
 	],
 	"variable": [
 		{
-			"id": "a2aee8c5-c624-4e94-9909-ec59ac02eda5",
+			"id": "affff6ad-6ab2-43b3-9063-8a3cdb89a0a7",
 			"key": "base_url",
 			"value": "https://restimplementation-202104.appspot.com",
 			"type": "string",
 			"description": ""
 		},
 		{
-			"id": "d2aa91ad-e4f8-4994-a340-f44796dc5f51",
+			"id": "8e3d34f1-1fb3-4d5b-a403-74933436c758",
 			"key": "prod",
 			"value": "https://restimplementation-202104.appspot.com",
 			"type": "string",
 			"description": ""
 		},
 		{
-			"id": "45479687-5f9c-458b-9962-ebcbd722d21a",
+			"id": "4970d6ab-357b-4234-9f9b-027a656a57a0",
 			"key": "test",
 			"value": "localhost:8080",
 			"type": "string",

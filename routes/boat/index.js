@@ -23,28 +23,42 @@ router.get('/boat', async function(req, res) {
 router.post('/boat', async function(req, res) {
   const { name, type, length } = req.body;
 
-  if( name && type && length && await Boat.isUnique({ name }) ) {
-    let id = await Boat.createBoat({ name, type, length });
-    res.status(201).json({ id });
-  } else {
-    res.status(400).json({
-      error: 'Bad Request'
-    });
+  try {
+    if( name && type && length && await Boat.isUnique({ name }) ) {
+      let id = await Boat.createBoat({ name, type, length });
+      res.status(201).json({ id });
+    } else {
+      res.status(400).json({
+        error: 'Bad Request'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: error.message
+    })
   }
+
+
 });
 
 
 router.get('/boat/:boatid', async function(req, res) {
   const { boatid } = req.params;
+  try {
+    const boat = await Boat.getBoat({ id: boatid });
 
-  const boat = await Boat.getBoat({ id: boatid });
-
-  if(boat)
-    res.json(boat);
-  else
+    if(boat)
+      res.json(boat);
+    else
+      throw Error;
+  } catch (error) {
+    console.log(error);
     res.status(404).json({
       error: 'Not Found'
     });
+  }
+
 });
 
 
@@ -54,7 +68,10 @@ router.patch('/boat/:boatid', async function(req, res) {
   let boatId;
 
   try {
-    if( name && type && length && at_sea ) {
+    const boat  = await Boat.getBoat({ id: boatid });
+    if(!boat) throw Error('Not Found');
+
+    if( name !== '' && type !== '' && length !== '' && at_sea !== '' ) {
       boatId = await Boat.updateBoat({
         id: boatid,
         name,
@@ -74,9 +91,14 @@ router.patch('/boat/:boatid', async function(req, res) {
       });
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-      error: 'Internal Failure'
-    });
+    if(error.message === 'Not Found')
+      res.status(404).json({
+        error: error.message
+      });
+    else
+      res.status(500).json({
+        error: 'Internal Failure'
+      });
   }
 });
 
@@ -152,7 +174,7 @@ router.put('/boat/:boatid/arrive/:slipid', async function(req, res) {
   } catch (error) {
     console.error(error);
     if(error.name === 'SlipError' || error.name === 'BoatError')
-      res.status(400).json({
+      res.status(401).json({
         error: error.message
       });
     else
@@ -179,8 +201,8 @@ router.put('/boat/:boatid/depart', async function(req, res) {
     });
   } catch (error) {
     console.error(error);
-    res.status(400).json({
-      error
+    res.status(401).json({
+      error: 'Unauthorized'
     });
   }
 });

@@ -23,28 +23,41 @@ router.get('/slip', async function(req, res) {
 router.post('/slip', async function(req, res) {
   const { number } = req.body;
 
-  if( number && await Slip.isUnique({ number }) ) {
-    let id = await Slip.createSlip({ number });
-    res.status(201).json({ id });
-  } else {
-    res.status(400).json({
-      error: 'Bad Request'
+  try {
+    if( number && await Slip.isUnique({ number }) ) {
+      let id = await Slip.createSlip({ number });
+      res.status(201).json({ id });
+    } else {
+      res.status(400).json({
+        error: 'Bad Request'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      error: error.message
     });
   }
+
 });
 
 
 router.get('/slip/:slipid', async function(req, res) {
   const { slipid } = req.params;
 
-  const slip = await Slip.getSlip({ id: parseInt(slipid) });
+  try {
+    const slip = await Slip.getSlip({ id: parseInt(slipid) });
 
-  if(slip)
-    res.status(200).json(slip);
-  else
+    if(slip)
+      res.status(200).json(slip);
+    else
+      throw Error;
+  } catch (error) {
     res.status(404).json({
       error: 'Not Found'
     });
+  }
+
 });
 
 
@@ -55,6 +68,9 @@ router.patch('/slip/:slipid', async function(req, res) {
 
   try {
     if( number ) {
+      const slip  = await Slip.getSlip({ id: slipid });
+      if(!slip) throw Error('Not Found');
+
       slipId = await Slip.updateSlip({
         id: parseInt(slipid),
         number,
@@ -74,9 +90,14 @@ router.patch('/slip/:slipid', async function(req, res) {
       });
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-      error: 'Internal Failure'
-    });
+    if(error.message === 'Not Found')
+      res.status(404).json({
+        error: error.message
+      });
+    else
+      res.status(500).json({
+        error: 'Internal Failure'
+      });
   }
 
 });
