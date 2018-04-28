@@ -20,6 +20,7 @@ async function getAllOfKind(KIND) {
 
     return entities;
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -37,6 +38,7 @@ async function createEntity({ KIND, data }) {
 
     return key.path[1];
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -44,7 +46,7 @@ async function createEntity({ KIND, data }) {
 
 async function getEntityById({ KIND, id }){
   try {
-    const key       = await datastore.key([KIND, id]);
+    const key       = await datastore.key([KIND, parseInt(id)]);
     const response  = await datastore.get(key);
 
     const entity = response[0];
@@ -56,6 +58,7 @@ async function getEntityById({ KIND, id }){
       return null;
     }
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -63,16 +66,16 @@ async function getEntityById({ KIND, id }){
 
 async function updateEntity({ KIND, id, data }) {
   try {
-    const key     = await datastore.key([KIND, id]);
+    const key     = datastore.key([KIND, parseInt(id)]);
     const entity  = {
       key,
       data
     };
-
-    await datastore.save(entity);
+    const res = await datastore.update(entity);
 
     return key.path[1];
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -80,9 +83,46 @@ async function updateEntity({ KIND, id, data }) {
 
 async function deleteEntity({ KIND, id }) {
   try {
-    const key = await datastore.key([KIND, id]);
+    const key = await datastore.key([KIND, parseInt(id)]);
     return await datastore.delete(key);
   } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
+async function filterDatabase({ KIND, key, value }) {
+  try {
+    const query = datastore.createQuery(KIND);
+
+    query.filter(key, value);
+
+    return await query.run();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
+async function firstAvailableEntityByFilter({ KIND, key, value }) {
+  try {
+    const query = datastore.createQuery(KIND);
+    query.filter(key, value);
+
+    const response = await query.run();
+
+    const entity = response[0][0];
+
+    if( entity ) {
+      entity.id = entity[datastore.KEY].id;
+      return entity;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -93,5 +133,7 @@ module.exports = {
   createEntity,
   getEntityById,
   updateEntity,
-  deleteEntity
+  deleteEntity,
+  filterDatabase,
+  firstAvailableEntityByFilter
 };

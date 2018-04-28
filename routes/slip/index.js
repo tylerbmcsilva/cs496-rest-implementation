@@ -6,8 +6,10 @@ const router = new Router();
 module.exports = router;
 
 
-function payloadHasId(err, req, res, next) {
-  if(req.body.id)
+
+function payloadContainsAllKeys(err, req, res, next) {
+  const { number, current_boat, arrival_date, departure_history } = req.body;
+  if( number && current_boat && arrival_date && departure_history )
     next();
   else
     next(err);
@@ -20,7 +22,9 @@ router.get('/slip', async function(req, res) {
     res.json(slips);
   } catch (error) {
     console.log(error);
-    res.status(500).send('Internal Error');
+    res.status(500).json({
+      error: 'Internal Error'
+    });
   }
 });
 
@@ -28,11 +32,13 @@ router.get('/slip', async function(req, res) {
 router.post('/slip', async function(req, res) {
   const { number } = req.body;
 
-  if( number) {
+  if( number && await Slip.isUnique({ number }) ) {
     let id = await Slip.createSlip({ number });
     res.status(201).json({ id });
   } else {
-    res.status(400).send('Bad Request');
+    res.status(400).json({
+      error: 'Bad Request'
+    });
   }
 });
 
@@ -45,26 +51,35 @@ router.get('/slip/:slipid', async function(req, res) {
   if(slip)
     res.status(200).json(slip);
   else
-    res.status(404).send('Not Found');
+    res.status(404).json({
+      error: 'Not Found'
+    });
 });
 
 
-router.patch('/slip/:slipid', payloadHasId, async function(req, res) {
+router.patch('/slip/:slipid', async function(req, res) {
   const { slipid } = req.params;
   const { number, current_boat, arrival_date, departure_history } = req.body;
+  let slipId;
 
-  const slipId = await Slip.updateSlip({
-    id: parseInt(slipid),
-    number,
-    current_boat,
-    arrival_date,
-    departure_history
-  });
-
-  if ( slipId )
-    res.status(202).json({ id: slipId });
-  else
-    res.status(404).send('Not Found');
+  if( number && current_boat && arrival_date && departure_history ) {
+    slipId = await Slip.updateSlip({
+      id: parseInt(slipid),
+      number,
+      current_boat,
+      arrival_date,
+      departure_history
+    });
+    if ( slipId )
+      res.status(202).json({ id: slipId });
+    else
+      res.status(404).json({
+        error: 'Not Found'
+      });
+  } else
+    res.status(400).json({
+      error: 'Bad Request'
+    });
 });
 
 
@@ -72,8 +87,12 @@ router.delete('/slip/:slipid', async function(req, res) {
   const { slipid } = req.params;
   try {
     await Slip.deleteSlip({ id: parseInt(slipid) })
-    res.status(204).send();
+    res.status(202).json({
+      message: 'Accepted'
+    });
   } catch (error) {
-    res.status(404).send('Not Found');
+    res.status(404).json({
+      error: 'Not Found'
+    });
   }
 });

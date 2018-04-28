@@ -26,7 +26,7 @@ async function createBoat({ name, type, length }) {
       name,
       type,
       length,
-      at_sea: false
+      at_sea: true
     };
 
     return await db.createEntity({ KIND, data });
@@ -70,10 +70,45 @@ async function deleteBoat({ id }) {
 }
 
 
+async function isUnique({ name }){
+  const response = await db.filterDatabase({
+    KIND,
+    key:    'name',
+    value:  name
+  });
+
+  if ( response[0].length > 0 )
+    return false;
+  else
+    return true;
+}
+
+
+async function arrive({ boatid }) {
+  const boat    = await getBoat({ id: boatid });
+  if(!boat.at_sea) {
+    let err = Error('Boat already docked');
+    err.name = 'BoatDockedError';
+    throw err;
+  }
+  boat.at_sea   = false;
+  return await updateBoat(boat);
+}
+
+
+async function depart({ boatid }) {
+  const boat    = await getBoat({ id: boatid });
+  boat.at_sea   = true;
+  return await updateBoat(boat);
+}
+
 module.exports = {
   getAllBoats,
   createBoat,
   getBoat,
   updateBoat,
-  deleteBoat
+  deleteBoat,
+  arrive,
+  depart,
+  isUnique
 }
