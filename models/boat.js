@@ -11,11 +11,18 @@ const db  = require('./index');
 const KIND = 'boat';
 
 
+function BoatError(message) {
+  const err = new Error(message);
+  err.name = 'BoatError';
+  throw err;
+}
+
+
 async function getAllBoats() {
   try {
     return await db.getAllOfKind(KIND);
   } catch (error) {
-    throw error;
+    BoatError(error.message);
   }
 }
 
@@ -31,7 +38,7 @@ async function createBoat({ name, type, length }) {
 
     return await db.createEntity({ KIND, data });
   } catch (error) {
-    throw error;
+    BoatError(error.message);
   }
 }
 
@@ -40,7 +47,7 @@ async function getBoat({ id }){
   try {
     return await db.getEntityById({ KIND, id });
   } catch (error) {
-    throw error;
+    BoatError(error.message);
   }
 }
 
@@ -56,7 +63,7 @@ async function updateBoat({ id, name, type, length, at_sea }) {
 
     return await db.updateEntity({ KIND, id, data });
   } catch (error) {
-    throw error;
+    BoatError(error.message);
   }
 }
 
@@ -65,7 +72,7 @@ async function deleteBoat({ id }) {
   try {
     return await db.deleteEntity({ KIND, id });
   } catch (error) {
-    throw error;
+    BoatError(error.message);
   }
 }
 
@@ -84,25 +91,20 @@ async function isUnique({ name }){
 }
 
 
-async function arrive({ boatid }) {
-  const boat    = await getBoat({ id: boatid });
-  if(!boat.at_sea) {
-    let err = Error('Boat already docked');
-    err.name = 'BoatDockedError';
-    throw err;
-  }
+async function arrive(boat) {
   boat.at_sea   = false;
   return await updateBoat(boat);
 }
 
 
-async function depart({ boatid }) {
-  const boat    = await getBoat({ id: boatid });
+async function depart(boat) {
   boat.at_sea   = true;
   return await updateBoat(boat);
 }
 
+
 module.exports = {
+  BoatError,
   getAllBoats,
   createBoat,
   getBoat,

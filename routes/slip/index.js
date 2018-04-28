@@ -1,19 +1,10 @@
-const Slip        = require('../../models/slip');
+const Boat        = require('../../models/boat');
 const { Router }  = require('express');
+const Slip        = require('../../models/slip');
 
 
 const router = new Router();
 module.exports = router;
-
-
-
-function payloadContainsAllKeys(err, req, res, next) {
-  const { number, current_boat, arrival_date, departure_history } = req.body;
-  if( number && current_boat && arrival_date && departure_history )
-    next();
-  else
-    next(err);
-}
 
 
 router.get('/slip', async function(req, res) {
@@ -62,31 +53,49 @@ router.patch('/slip/:slipid', async function(req, res) {
   const { number, current_boat, arrival_date, departure_history } = req.body;
   let slipId;
 
-  if( number && current_boat && arrival_date && departure_history ) {
-    slipId = await Slip.updateSlip({
-      id: parseInt(slipid),
-      number,
-      current_boat,
-      arrival_date,
-      departure_history
-    });
-    if ( slipId )
-      res.status(202).json({ id: slipId });
-    else
-      res.status(404).json({
-        error: 'Not Found'
+  try {
+    if( number ) {
+      slipId = await Slip.updateSlip({
+        id: parseInt(slipid),
+        number,
+        current_boat,
+        arrival_date,
+        departure_history
       });
-  } else
-    res.status(400).json({
-      error: 'Bad Request'
+      if ( slipId )
+        res.status(202).json({ id: slipId });
+      else
+        res.status(404).json({
+          error: 'Not Found'
+        });
+    } else
+      res.status(400).json({
+        error: 'Bad Request'
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: 'Internal Failure'
     });
+  }
+
 });
 
 
 router.delete('/slip/:slipid', async function(req, res) {
   const { slipid } = req.params;
   try {
-    await Slip.deleteSlip({ id: parseInt(slipid) })
+    const slip  = await Slip.getSlip({ id: slipid });
+    if(!slip) throw Error;
+
+    if (slip.current_boat) {
+      const boat = await Boat.getBoat({ id: slip.current_boat });
+      if(!boat) throw Error;
+
+      await Boat.depart(boat)
+    }
+
+    await Slip.deleteSlip({ id: slipid })
     res.status(202).json({
       message: 'Accepted'
     });

@@ -1,0 +1,1252 @@
+{
+	"info": {
+		"_postman_id": "3d45ec6f-207d-4fd4-b70d-036ca829fd7a",
+		"name": "REST Implementation Test Suite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Boat",
+			"description": "",
+			"item": [
+				{
+					"name": "GET /boat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb7fdba5-b9a2-486a-8cee-c499d5c2a5c1",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Array in JSON body', function(){",
+									"    pm.expect(responseBody[0]).to.eql('[');",
+									"    pm.expect(responseBody[responseBody.length-1]).to.eql(']');",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/boat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /boat - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5cf32396-3f74-4dd0-b722-ddb614b35d7e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 201', function(){",
+									"    pm.response.to.have.status(201);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return id of created boat', function() {",
+									"    pm.response.to.have.jsonBody('id')",
+									"});",
+									"",
+									"pm.globals.set(\"testBoatId\", JSON.parse(responseBody).id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"TestBoat\",\n\t\"length\": 100,\n\t\"type\": \"Skipper\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /boat - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b1fba0c4-7369-4aea-bb63-a52de036d568",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 400', function(){",
+									"    pm.response.to.have.status(400);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function() {",
+									"    pm.response.to.have.jsonBody('error')",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /boat/{boatid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9652127c-8c62-4c36-9204-50df7ed36512",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('name');",
+									"    pm.response.to.have.jsonBody('length');",
+									"    pm.response.to.have.jsonBody('type');",
+									"    pm.response.to.have.jsonBody('at_sea');",
+									"});",
+									"",
+									"pm.globals.set('testBoat', responseBody)",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /boat/{boatid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66d56a94-3a3f-4bcb-a5f5-0a409c185a3f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat ID in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"});",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TestBoat\",\n    \"type\": \"Cruiser\",\n    \"at_sea\": true,\n    \"length\": 120,\n    \"id\": \"5638830484881408\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /boat/{boatid} - Verifying Change",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "617ea1eb-f9e7-49ee-b19a-5af12fb149a1",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function() {",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function() {",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat in JSON body', function() {",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('name');",
+									"    pm.response.to.have.jsonBody('length');",
+									"    pm.response.to.have.jsonBody('type');",
+									"    pm.response.to.have.jsonBody('at_sea');",
+									"});",
+									"",
+									"pm.test('Should have updated values', function() {",
+									"    var orig = JSON.parse(pm.globals.get(\"testBoat\"));",
+									"    pm.expect(responseBody.length).to.not.equal(orig.length)",
+									"})",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TestBoat\",\n    \"type\": \"Cruiser\",\n    \"at_sea\": true,\n    \"length\": 120,\n    \"id\": \"5638830484881408\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Slip",
+			"description": "",
+			"item": [
+				{
+					"name": "GET /slip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb7fdba5-b9a2-486a-8cee-c499d5c2a5c1",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Array in JSON body', function(){",
+									"    pm.expect(responseBody[0]).to.eql('[');",
+									"    pm.expect(responseBody[responseBody.length-1]).to.eql(']');",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /slip - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "17018e60-f2d6-4bd4-a5e8-70c417188509",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 201', function(){",
+									"    pm.response.to.have.status(201);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return id of created boat', function() {",
+									"    pm.response.to.have.jsonBody('id')",
+									"});",
+									"",
+									"pm.globals.set(\"testSlipId\", JSON.parse(responseBody).id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\": 123456\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/slip",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /slip - Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b1fba0c4-7369-4aea-bb63-a52de036d568",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 400', function(){",
+									"    pm.response.to.have.status(400);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return error in JSON body', function() {",
+									"    pm.response.to.have.jsonBody('error')",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/slip",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /slip/{slipid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c9bb9425-fa4e-40c6-aecd-9ee00ab86432",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"pm.globals.set('testSlip', responseBody)",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testSlipId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testSlipId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /slip/{slipid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66d56a94-3a3f-4bcb-a5f5-0a409c185a3f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat ID in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"});",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrival_date\": \"\",\n    \"departure_history\": [],\n    \"number\": 54321,\n    \"current_boat\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testSlipId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testSlipId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH /slip/{slipid} - Verifying Change",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "086a95e6-85bb-4eb7-989f-f6d74edd3757",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function() {",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function() {",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"pm.test('Should have updated values', function() {",
+									"    var orig = JSON.parse(pm.globals.get(\"testSlip\"));",
+									"    pm.expect(responseBody.number).to.not.equal(orig.number)",
+									"})",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"TestBoat\",\n    \"type\": \"Cruiser\",\n    \"at_sea\": true,\n    \"length\": 120,\n    \"id\": \"5638830484881408\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testSlipId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testSlipId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dock",
+			"description": "",
+			"item": [
+				{
+					"name": "PUT /boat/{boatid}/arrive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66d254bb-31b3-4c66-b7d1-b86414ce1b2d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat ID in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('slip');",
+									"    pm.response.to.have.jsonBody('boat');",
+									"});",
+									"",
+									"var res = JSON.parse(responseBody);",
+									"pm.globals.set('testDockSlip', res.slip.id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrival_date\": \"\",\n    \"departure_history\": [],\n    \"number\": 54321,\n    \"current_boat\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}/arrive",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}",
+								"arrive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /slip/{slipid} - Verify Slip has Boat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "118395af-f76d-4221-8ffc-672c3e29e686",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"pm.test('Should have current_boat as test boat', function() {",
+									"    var testBoatId = JSON.parse(pm.globals.get(\"testBoatId\"));",
+									"    var res = JSON.parse(responseBody);",
+									"    pm.expect(res.current_boat).to.equal(`${testBoatId}`)",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testDockSlip}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testDockSlip}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /boat/{boatid}/depart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9cc27ff-3c00-42d5-aa41-cf52fef1a15b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat ID in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('slip');",
+									"    pm.response.to.have.jsonBody('boat');",
+									"});",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}/depart",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}",
+								"depart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /slip/{slipid} - Verify Slip has Removed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "48998eff-32e4-4b38-a890-57e11a9a7691",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"",
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"pm.test('Should not have current_boat as test boat', function() {",
+									"    var res = JSON.parse(responseBody);",
+									"    pm.expect(res.current_boat).to.equal('')",
+									"});",
+									"",
+									"pm.test('Should have test boat in departure history', function() {",
+									"    var departureHistory = JSON.parse(responseBody).departure_history;",
+									"    var testBoatId = pm.globals.get('testBoatId');",
+									"    var boat = departureHistory.find(function(el){return el.departed_boat === testBoatId});",
+									"    pm.expect(boat).to.not.eql(null);",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testDockSlip}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testDockSlip}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /boat/{boatid}/arrive/{slipid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "66d254bb-31b3-4c66-b7d1-b86414ce1b2d",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat ID in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('slip');",
+									"    pm.response.to.have.jsonBody('boat');",
+									"});",
+									"",
+									"var res = JSON.parse(responseBody);",
+									"pm.globals.set('testDockSlip', res.slip.id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrival_date\": \"\",\n    \"departure_history\": [],\n    \"number\": 54321,\n    \"current_boat\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}/arrive/{{testSlipId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}",
+								"arrive",
+								"{{testSlipId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /slip/{slipid} - Verify Slip has Boat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "118395af-f76d-4221-8ffc-672c3e29e686",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"pm.test('Should have current_boat as test boat', function() {",
+									"    var testBoatId = JSON.parse(pm.globals.get(\"testBoatId\"));",
+									"    var res = JSON.parse(responseBody);",
+									"    pm.expect(res.current_boat).to.equal(`${testBoatId}`)",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testDockSlip}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testDockSlip}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /boat/{boatid}/depart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9cc27ff-3c00-42d5-aa41-cf52fef1a15b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Boat ID in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('slip');",
+									"    pm.response.to.have.jsonBody('boat');",
+									"});",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}/depart",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}",
+								"depart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /slip/{slipid} - Verify Slip has Removed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "48998eff-32e4-4b38-a890-57e11a9a7691",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"",
+									"pm.test('Response is 200', function(){",
+									"    pm.response.to.have.status(200);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return Slip in JSON body', function(){",
+									"    pm.response.to.have.jsonBody('id');",
+									"    pm.response.to.have.jsonBody('number');",
+									"    pm.response.to.have.jsonBody('current_boat');",
+									"    pm.response.to.have.jsonBody('arrival_date');",
+									"    pm.response.to.have.jsonBody('departure_history');",
+									"});",
+									"",
+									"pm.test('Should not have current_boat as test boat', function() {",
+									"    var res = JSON.parse(responseBody);",
+									"    pm.expect(res.current_boat).to.equal('')",
+									"});",
+									"",
+									"pm.test('Should have test boat in departure history', function() {",
+									"    var departureHistory = JSON.parse(responseBody).departure_history;",
+									"    var testBoatId = pm.globals.get('testBoatId');",
+									"    var boat = departureHistory.find(function(el){return el.departed_boat === testBoatId});",
+									"    pm.expect(boat).to.not.eql(null);",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testDockSlip}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testDockSlip}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"description": "",
+			"item": [
+				{
+					"name": "DELETE /boat/{boatid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1d8aff99-b16a-40ca-b81d-e1f9045426a7",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return message in JSON body', function(){",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql('Accepted');",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/boat/{{testBoatId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"boat",
+								"{{testBoatId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /slip/{slipid}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78b17fe4-4919-48e3-93c4-cc72a1e621f6",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response is 202', function(){",
+									"    pm.response.to.have.status(202);   ",
+									"});",
+									"",
+									"pm.test('Should return JSON body', function(){",
+									"    pm.response.to.have.jsonBody()   ",
+									"});",
+									"",
+									"pm.test('Should return message in JSON body', function(){",
+									"    pm.expect(JSON.parse(responseBody).message).to.eql('Accepted');",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{base_url}}/slip/{{testSlipId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"slip",
+								"{{testSlipId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "51d802f3-d809-4162-92ba-1c77bfbd51da",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4a5269a5-3d16-4a7f-b8f8-da4d80dc2438",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "cf154f08-283e-4788-b669-8e254cd3a83b",
+			"key": "base_url",
+			"value": "localhost:8080",
+			"type": "string",
+			"description": ""
+		},
+		{
+			"id": "706c5821-fb4a-4a78-9435-3ddbf915f5e3",
+			"key": "prod",
+			"value": "https://restimplementation-202104.appspot.com",
+			"type": "string",
+			"description": ""
+		}
+	]
+}

@@ -141,6 +141,7 @@ async function deleteBoat({ boatid }) {
 async function arriveBoatFirstAvailable({ boatid }) {
   const now   = new Date();
   const slip  = await getFirstAvailable();
+
   slip.current_boat = boatid;
   slip.arrival_date = `${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()}`;
 

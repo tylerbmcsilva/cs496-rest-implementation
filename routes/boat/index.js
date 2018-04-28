@@ -14,7 +14,7 @@ router.get('/boat', async function(req, res) {
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      error: 'Internal Error'
+      error: error.message
     });
   }
 });
@@ -25,7 +25,7 @@ router.post('/boat', async function(req, res) {
 
   if( name && type && length && await Boat.isUnique({ name }) ) {
     let id = await Boat.createBoat({ name, type, length });
-    res.json({ id });
+    res.status(201).json({ id });
   } else {
     res.status(400).json({
       error: 'Bad Request'
@@ -53,24 +53,31 @@ router.patch('/boat/:boatid', async function(req, res) {
   const { name, type, length, at_sea } = req.body;
   let boatId;
 
-  if( name && type && length && at_sea ) {
-    boatId = await Boat.updateBoat({
-      id: boatid,
-      name,
-      type,
-      length,
-      at_sea
-    });
-    if ( boatId )
-      res.status(202).json({ id: boatId });
-    else
-      res.status(404).json({
-        error: 'Not Found'
+  try {
+    if( name && type && length && at_sea ) {
+      boatId = await Boat.updateBoat({
+        id: boatid,
+        name,
+        type,
+        length,
+        at_sea
       });
-  } else
-    res.status(400).json({
-      error: 'Bad Request'
+      if ( boatId )
+        res.status(202).json({ id: boatId });
+      else
+        res.status(404).json({
+          error: 'Not Found'
+        });
+    } else
+      res.status(400).json({
+        error: 'Bad Request'
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: 'Internal Failure'
     });
+  }
 });
 
 
@@ -98,17 +105,24 @@ router.put('/boat/:boatid/arrive', async function(req, res) {
   const { boatid }  = req.params;
 
   try {
+    const boat  = Boat.getBoat({ id: boatid });
+    if( boat.at_sea === false ) Boat.BoatError('Boat already docked');
+
     const slipId  = await Slip.arriveBoatFirstAvailable({ boatid });
-    const boatId  = await Boat.arrive({ boatid });
+    const boatId  = await Boat.arrive({ id: boatid, ...boat });
 
     res.status(202).json({
-      slip: { id: slipId },
-      boat: { id: boatId }
+      slip: { id: `${slipId}` },
+      boat: { id: `${boatId}` }
     });
 
   } catch (error) {
     console.error(error);
-    if(error.name === 'TypeError' || error.name === 'BoatDockedError')
+    if(error.name === 'TypeError')
+      res.status(401).json({
+        error: 'Unauthorized'
+      });
+    else if (error.name === 'BoatError')
       res.status(400).json({
         error: error.message
       });
@@ -124,8 +138,11 @@ router.put('/boat/:boatid/arrive/:slipid', async function(req, res) {
   const { boatid, slipid }  = req.params;
 
   try {
+    const boat  = Boat.getBoat({ id: boatid });
+    if( boat.at_sea === false ) Boat.BoatError('Boat already docked');
+
     const slipId  = await Slip.arriveBoatForSlip({ boatid, slipid });
-    const boatId  = await Boat.arrive({ boatid });
+    const boatId  = await Boat.arrive({ id: boatid, ...boat });
 
     res.status(202).json({
       slip: { id: `${slipId}` },
@@ -134,7 +151,7 @@ router.put('/boat/:boatid/arrive/:slipid', async function(req, res) {
 
   } catch (error) {
     console.error(error);
-    if(error.name === 'OccupiedSlipError' || error.name === 'BoatDockedError')
+    if(error.name === 'SlipError' || error.name === 'BoatError')
       res.status(400).json({
         error: error.message
       });
@@ -150,8 +167,11 @@ router.put('/boat/:boatid/depart', async function(req, res) {
   const { boatid }  = req.params;
 
   try {
+    const boat  = Boat.getBoat({ id: boatid });
+    if( boat.at_sea === true ) Boat.BoatError('Boat already at sea');
+
     const slipId  = await Slip.departBoat({ boatid });
-    const boatId  = await Boat.depart({ boatid });
+    const boatId  = await Boat.depart({ id: boatid, ...boat });
 
     res.status(202).json({
       slip: { id: `${slipId}` },
