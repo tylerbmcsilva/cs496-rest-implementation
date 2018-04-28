@@ -1235,16 +1235,23 @@
 	],
 	"variable": [
 		{
-			"id": "cf154f08-283e-4788-b669-8e254cd3a83b",
+			"id": "a2aee8c5-c624-4e94-9909-ec59ac02eda5",
 			"key": "base_url",
-			"value": "localhost:8080",
+			"value": "https://restimplementation-202104.appspot.com",
 			"type": "string",
 			"description": ""
 		},
 		{
-			"id": "706c5821-fb4a-4a78-9435-3ddbf915f5e3",
+			"id": "d2aa91ad-e4f8-4994-a340-f44796dc5f51",
 			"key": "prod",
 			"value": "https://restimplementation-202104.appspot.com",
+			"type": "string",
+			"description": ""
+		},
+		{
+			"id": "45479687-5f9c-458b-9962-ebcbd722d21a",
+			"key": "test",
+			"value": "localhost:8080",
 			"type": "string",
 			"description": ""
 		}

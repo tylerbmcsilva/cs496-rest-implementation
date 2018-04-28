@@ -1,14 +1,14 @@
 {
-	"id": "36e76468-2271-4070-a991-ce544dbc4170",
+	"id": "1da9cab1-2dff-4fec-9411-59753bca8bc6",
 	"name": "REST Implementation Test Suite",
 	"allTests": [],
-	"timestamp": "2018-04-28T22:11:06.979Z",
+	"timestamp": "2018-04-28T22:45:57.836Z",
 	"collection_id": "3d45ec6f-207d-4fd4-b70d-036ca829fd7a",
 	"folder_id": 0,
 	"target_type": "collection",
 	"environment_id": "0",
 	"data": [],
-	"delay": 500,
+	"delay": 5000,
 	"count": 1,
 	"collection": {
 		"id": "3d45ec6f-207d-4fd4-b70d-036ca829fd7a",
@@ -40,7 +40,7 @@
 		"variables": [
 			{
 				"key": "base_url",
-				"value": "localhost:8080",
+				"value": "https://restimplementation-202104.appspot.com",
 				"description": "",
 				"type": "text",
 				"disabled": false
@@ -48,6 +48,13 @@
 			{
 				"key": "prod",
 				"value": "https://restimplementation-202104.appspot.com",
+				"description": "",
+				"type": "text",
+				"disabled": false
+			},
+			{
+				"key": "test",
+				"value": "localhost:8080",
 				"description": "",
 				"type": "text",
 				"disabled": false
@@ -72,31 +79,31 @@
 	"globals": [
 		{
 			"key": "testBoat",
-			"value": "{\"at_sea\":true,\"length\":100,\"name\":\"TestBoat\",\"type\":\"Skipper\",\"id\":\"5730827476402176\"}",
+			"value": "{\"name\":\"TestBoat\",\"type\":\"Skipper\",\"at_sea\":true,\"length\":100,\"id\":\"5691726094139392\"}",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testSlip",
-			"value": "{\"number\":123456,\"current_boat\":\"\",\"arrival_date\":\"\",\"departure_history\":[],\"id\":\"5717495361044480\"}",
+			"value": "{\"number\":123456,\"current_boat\":\"\",\"arrival_date\":\"\",\"departure_history\":[],\"id\":\"5733935958982656\"}",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testSlipId",
-			"value": "5717495361044480",
+			"value": "5733935958982656",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testBoatId",
-			"value": "5730827476402176",
+			"value": "5691726094139392",
 			"enabled": true,
 			"type": "text"
 		},
 		{
 			"key": "testDockSlip",
-			"value": "5717495361044480",
+			"value": "5733935958982656",
 			"enabled": true,
 			"type": "text"
 		}
@@ -105,7 +112,7 @@
 		{
 			"name": "GET /boat",
 			"id": "ec7f0d2b-66e1-4756-8c73-1dc28f178bff",
-			"url": "localhost:8080/boat",
+			"url": "https://restimplementation-202104.appspot.com/boat",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -136,7 +143,7 @@
 				}
 			},
 			"times": [
-				"297"
+				"988"
 			],
 			"allTests": [
 				{
@@ -145,14 +152,14 @@
 					"Should return Array in JSON body": true
 				}
 			],
-			"time": "297",
-			"totalRequestTime": "297",
+			"time": "988",
+			"totalRequestTime": "988",
 			"iterationResults": {}
 		},
 		{
 			"name": "POST /boat - Success",
 			"id": "bf5ed0d8-0452-46fb-aee9-6d1babf21a59",
-			"url": "localhost:8080/boat",
+			"url": "https://restimplementation-202104.appspot.com/boat",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 201,
@@ -183,7 +190,7 @@
 				}
 			},
 			"times": [
-				"240"
+				"544"
 			],
 			"allTests": [
 				{
@@ -192,14 +199,14 @@
 					"Should return id of created boat": true
 				}
 			],
-			"time": "240",
-			"totalRequestTime": "240",
+			"time": "544",
+			"totalRequestTime": "544",
 			"iterationResults": {}
 		},
 		{
 			"name": "POST /boat - Error",
 			"id": "45293e90-fe40-46e5-8d0c-722fa0a81069",
-			"url": "localhost:8080/boat",
+			"url": "https://restimplementation-202104.appspot.com/boat",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 400,
@@ -230,7 +237,7 @@
 				}
 			},
 			"times": [
-				"4"
+				"364"
 			],
 			"allTests": [
 				{
@@ -239,14 +246,14 @@
 					"Should return error in JSON body": true
 				}
 			],
-			"time": "4",
-			"totalRequestTime": "4",
+			"time": "364",
+			"totalRequestTime": "364",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /boat/{boatid}",
 			"id": "19cd51db-6c9b-4191-913e-ea454cc52984",
-			"url": "localhost:8080/boat/5764017373052928",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -277,7 +284,7 @@
 				}
 			},
 			"times": [
-				"318"
+				"890"
 			],
 			"allTests": [
 				{
@@ -286,14 +293,14 @@
 					"Should return Boat in JSON body": true
 				}
 			],
-			"time": "318",
-			"totalRequestTime": "318",
+			"time": "890",
+			"totalRequestTime": "890",
 			"iterationResults": {}
 		},
 		{
 			"name": "PATCH /boat/{boatid}",
 			"id": "e8e7010e-b0ae-45e6-a6ca-4c6b7f57ffa8",
-			"url": "localhost:8080/boat/5764017373052928",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -324,7 +331,7 @@
 				}
 			},
 			"times": [
-				"176"
+				"464"
 			],
 			"allTests": [
 				{
@@ -333,14 +340,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "176",
-			"totalRequestTime": "176",
+			"time": "464",
+			"totalRequestTime": "464",
 			"iterationResults": {}
 		},
 		{
 			"name": "PATCH /boat/{boatid} - Verifying Change",
 			"id": "6f12fd11-baa9-485d-89f0-c3d06a93d9f7",
-			"url": "localhost:8080/boat/5764017373052928",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -376,7 +383,7 @@
 				}
 			},
 			"times": [
-				"88"
+				"225"
 			],
 			"allTests": [
 				{
@@ -386,14 +393,14 @@
 					"Should have updated values": true
 				}
 			],
-			"time": "88",
-			"totalRequestTime": "88",
+			"time": "225",
+			"totalRequestTime": "225",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip",
 			"id": "e04880d4-cce1-4b00-801c-07976bdad117",
-			"url": "localhost:8080/slip",
+			"url": "https://restimplementation-202104.appspot.com/slip",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -424,7 +431,7 @@
 				}
 			},
 			"times": [
-				"83"
+				"325"
 			],
 			"allTests": [
 				{
@@ -433,14 +440,14 @@
 					"Should return Array in JSON body": true
 				}
 			],
-			"time": "83",
-			"totalRequestTime": "83",
+			"time": "325",
+			"totalRequestTime": "325",
 			"iterationResults": {}
 		},
 		{
 			"name": "POST /slip - Success",
 			"id": "f26a58c2-e99d-422e-900f-87e7bf62b148",
-			"url": "localhost:8080/slip",
+			"url": "https://restimplementation-202104.appspot.com/slip",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 201,
@@ -471,7 +478,7 @@
 				}
 			},
 			"times": [
-				"449"
+				"378"
 			],
 			"allTests": [
 				{
@@ -480,14 +487,14 @@
 					"Should return id of created boat": true
 				}
 			],
-			"time": "449",
-			"totalRequestTime": "449",
+			"time": "378",
+			"totalRequestTime": "378",
 			"iterationResults": {}
 		},
 		{
 			"name": "POST /slip - Error",
 			"id": "0c70d557-9776-4a6d-9970-f3ea8b7b4560",
-			"url": "localhost:8080/slip",
+			"url": "https://restimplementation-202104.appspot.com/slip",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 400,
@@ -518,7 +525,7 @@
 				}
 			},
 			"times": [
-				"3"
+				"397"
 			],
 			"allTests": [
 				{
@@ -527,14 +534,14 @@
 					"Should return error in JSON body": true
 				}
 			],
-			"time": "3",
-			"totalRequestTime": "3",
+			"time": "397",
+			"totalRequestTime": "397",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid}",
 			"id": "2cd5560b-3c91-4ad1-95c3-cb6b52cf334d",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -565,7 +572,7 @@
 				}
 			},
 			"times": [
-				"93"
+				"1213"
 			],
 			"allTests": [
 				{
@@ -574,14 +581,14 @@
 					"Should return Slip in JSON body": true
 				}
 			],
-			"time": "93",
-			"totalRequestTime": "93",
+			"time": "1213",
+			"totalRequestTime": "1213",
 			"iterationResults": {}
 		},
 		{
 			"name": "PATCH /slip/{slipid}",
 			"id": "0d37c9e3-ab2d-4f8e-bec5-43778a321239",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -612,7 +619,7 @@
 				}
 			},
 			"times": [
-				"123"
+				"327"
 			],
 			"allTests": [
 				{
@@ -621,14 +628,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "123",
-			"totalRequestTime": "123",
+			"time": "327",
+			"totalRequestTime": "327",
 			"iterationResults": {}
 		},
 		{
 			"name": "PATCH /slip/{slipid} - Verifying Change",
 			"id": "9b29c4b3-d0dc-4abc-9295-9c78fc8fdd2b",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -664,7 +671,7 @@
 				}
 			},
 			"times": [
-				"97"
+				"273"
 			],
 			"allTests": [
 				{
@@ -674,14 +681,14 @@
 					"Should have updated values": true
 				}
 			],
-			"time": "97",
-			"totalRequestTime": "97",
+			"time": "273",
+			"totalRequestTime": "273",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/arrive",
 			"id": "d5f41b11-dde6-45c6-92af-b345f2145ef5",
-			"url": "localhost:8080/boat/5764017373052928/arrive",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -712,7 +719,7 @@
 				}
 			},
 			"times": [
-				"455"
+				"883"
 			],
 			"allTests": [
 				{
@@ -721,14 +728,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "455",
-			"totalRequestTime": "455",
+			"time": "883",
+			"totalRequestTime": "883",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "8c9c277f-666b-469e-9e2b-6ae27b3ed789",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -764,7 +771,7 @@
 				}
 			},
 			"times": [
-				"94"
+				"133"
 			],
 			"allTests": [
 				{
@@ -774,14 +781,14 @@
 					"Should have current_boat as test boat": true
 				}
 			],
-			"time": "94",
-			"totalRequestTime": "94",
+			"time": "133",
+			"totalRequestTime": "133",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "5567baf1-dcaa-41ed-a6f6-316bb806bb56",
-			"url": "localhost:8080/boat/5764017373052928/depart",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -812,7 +819,7 @@
 				}
 			},
 			"times": [
-				"556"
+				"1138"
 			],
 			"allTests": [
 				{
@@ -821,14 +828,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "556",
-			"totalRequestTime": "556",
+			"time": "1138",
+			"totalRequestTime": "1138",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "32d5e9e4-ea8c-477b-9ada-b44227884e84",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -870,7 +877,7 @@
 				}
 			},
 			"times": [
-				"101"
+				"277"
 			],
 			"allTests": [
 				{
@@ -881,14 +888,14 @@
 					"Should have test boat in departure history": true
 				}
 			],
-			"time": "101",
-			"totalRequestTime": "101",
+			"time": "277",
+			"totalRequestTime": "277",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/arrive/{slipid}",
 			"id": "9a3cc6e1-e944-4e89-98e5-ecd01f0cb6f4",
-			"url": "localhost:8080/boat/5764017373052928/arrive/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -919,7 +926,7 @@
 				}
 			},
 			"times": [
-				"7653"
+				"476"
 			],
 			"allTests": [
 				{
@@ -928,14 +935,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "7653",
-			"totalRequestTime": "7653",
+			"time": "476",
+			"totalRequestTime": "476",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "e9a81c60-70dd-4a08-a205-62712dafc67c",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -971,7 +978,7 @@
 				}
 			},
 			"times": [
-				"90"
+				"220"
 			],
 			"allTests": [
 				{
@@ -981,14 +988,14 @@
 					"Should have current_boat as test boat": true
 				}
 			],
-			"time": "90",
-			"totalRequestTime": "90",
+			"time": "220",
+			"totalRequestTime": "220",
 			"iterationResults": {}
 		},
 		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "23c8cbcc-3716-44fe-b0d5-2fb6b767d1a6",
-			"url": "localhost:8080/boat/5764017373052928/depart",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -1019,7 +1026,7 @@
 				}
 			},
 			"times": [
-				"453"
+				"947"
 			],
 			"allTests": [
 				{
@@ -1028,14 +1035,14 @@
 					"Should return Boat ID in JSON body": true
 				}
 			],
-			"time": "453",
-			"totalRequestTime": "453",
+			"time": "947",
+			"totalRequestTime": "947",
 			"iterationResults": {}
 		},
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "0af9ca76-fa7d-4cbd-9ce2-578a18bfa0c1",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 200,
@@ -1077,7 +1084,7 @@
 				}
 			},
 			"times": [
-				"112"
+				"277"
 			],
 			"allTests": [
 				{
@@ -1088,14 +1095,14 @@
 					"Should have test boat in departure history": true
 				}
 			],
-			"time": "112",
-			"totalRequestTime": "112",
+			"time": "277",
+			"totalRequestTime": "277",
 			"iterationResults": {}
 		},
 		{
 			"name": "DELETE /boat/{boatid}",
 			"id": "c37494c2-6ce7-4ba2-802c-a6a5830743dc",
-			"url": "localhost:8080/boat/5764017373052928",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -1126,7 +1133,7 @@
 				}
 			},
 			"times": [
-				"603"
+				"1128"
 			],
 			"allTests": [
 				{
@@ -1135,14 +1142,14 @@
 					"Should return message in JSON body": true
 				}
 			],
-			"time": "603",
-			"totalRequestTime": "603",
+			"time": "1128",
+			"totalRequestTime": "1128",
 			"iterationResults": {}
 		},
 		{
 			"name": "DELETE /slip/{slipid}",
 			"id": "4e0a7646-1ff2-41bb-b9c2-6d39c167a031",
-			"url": "localhost:8080/slip/5739238230327296",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
 			"totalTime": 0,
 			"responseCode": {
 				"code": 202,
@@ -1173,7 +1180,7 @@
 				}
 			},
 			"times": [
-				"105"
+				"333"
 			],
 			"allTests": [
 				{
@@ -1182,21 +1189,21 @@
 					"Should return message in JSON body": true
 				}
 			],
-			"time": "105",
-			"totalRequestTime": "105",
+			"time": "333",
+			"totalRequestTime": "333",
 			"iterationResults": {}
 		}
 	],
 	"totalPass": 80,
 	"totalFail": 0,
-	"totalTime": 12193,
+	"totalTime": 12200,
 	"lifecycle": "done",
 	"requests": [
 		{
 			"name": "GET /boat",
 			"id": "ec7f0d2b-66e1-4756-8c73-1dc28f178bff",
-			"url": "localhost:8080/boat",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1223,8 +1230,8 @@
 		{
 			"name": "POST /boat - Success",
 			"id": "bf5ed0d8-0452-46fb-aee9-6d1babf21a59",
-			"url": "localhost:8080/boat",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 201,
 				"name": "Created",
@@ -1251,8 +1258,8 @@
 		{
 			"name": "POST /boat - Error",
 			"id": "45293e90-fe40-46e5-8d0c-722fa0a81069",
-			"url": "localhost:8080/boat",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request",
@@ -1279,8 +1286,8 @@
 		{
 			"name": "GET /boat/{boatid}",
 			"id": "19cd51db-6c9b-4191-913e-ea454cc52984",
-			"url": "localhost:8080/boat/5764017373052928",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1307,8 +1314,8 @@
 		{
 			"name": "PATCH /boat/{boatid}",
 			"id": "e8e7010e-b0ae-45e6-a6ca-4c6b7f57ffa8",
-			"url": "localhost:8080/boat/5764017373052928",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1335,8 +1342,8 @@
 		{
 			"name": "PATCH /boat/{boatid} - Verifying Change",
 			"id": "6f12fd11-baa9-485d-89f0-c3d06a93d9f7",
-			"url": "localhost:8080/boat/5764017373052928",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1367,8 +1374,8 @@
 		{
 			"name": "GET /slip",
 			"id": "e04880d4-cce1-4b00-801c-07976bdad117",
-			"url": "localhost:8080/slip",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1395,8 +1402,8 @@
 		{
 			"name": "POST /slip - Success",
 			"id": "f26a58c2-e99d-422e-900f-87e7bf62b148",
-			"url": "localhost:8080/slip",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 201,
 				"name": "Created",
@@ -1423,8 +1430,8 @@
 		{
 			"name": "POST /slip - Error",
 			"id": "0c70d557-9776-4a6d-9970-f3ea8b7b4560",
-			"url": "localhost:8080/slip",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 400,
 				"name": "Bad Request",
@@ -1451,8 +1458,8 @@
 		{
 			"name": "GET /slip/{slipid}",
 			"id": "2cd5560b-3c91-4ad1-95c3-cb6b52cf334d",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1479,8 +1486,8 @@
 		{
 			"name": "PATCH /slip/{slipid}",
 			"id": "0d37c9e3-ab2d-4f8e-bec5-43778a321239",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1507,8 +1514,8 @@
 		{
 			"name": "PATCH /slip/{slipid} - Verifying Change",
 			"id": "9b29c4b3-d0dc-4abc-9295-9c78fc8fdd2b",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1539,8 +1546,8 @@
 		{
 			"name": "PUT /boat/{boatid}/arrive",
 			"id": "d5f41b11-dde6-45c6-92af-b345f2145ef5",
-			"url": "localhost:8080/boat/5764017373052928/arrive",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1567,8 +1574,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "8c9c277f-666b-469e-9e2b-6ae27b3ed789",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1599,8 +1606,8 @@
 		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "5567baf1-dcaa-41ed-a6f6-316bb806bb56",
-			"url": "localhost:8080/boat/5764017373052928/depart",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1627,8 +1634,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "32d5e9e4-ea8c-477b-9ada-b44227884e84",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1663,8 +1670,8 @@
 		{
 			"name": "PUT /boat/{boatid}/arrive/{slipid}",
 			"id": "9a3cc6e1-e944-4e89-98e5-ecd01f0cb6f4",
-			"url": "localhost:8080/boat/5764017373052928/arrive/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/arrive/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1691,8 +1698,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Boat",
 			"id": "e9a81c60-70dd-4a08-a205-62712dafc67c",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1723,8 +1730,8 @@
 		{
 			"name": "PUT /boat/{boatid}/depart",
 			"id": "23c8cbcc-3716-44fe-b0d5-2fb6b767d1a6",
-			"url": "localhost:8080/boat/5764017373052928/depart",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672/depart",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1751,8 +1758,8 @@
 		{
 			"name": "GET /slip/{slipid} - Verify Slip has Removed",
 			"id": "0af9ca76-fa7d-4cbd-9ce2-578a18bfa0c1",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1787,8 +1794,8 @@
 		{
 			"name": "DELETE /boat/{boatid}",
 			"id": "c37494c2-6ce7-4ba2-802c-a6a5830743dc",
-			"url": "localhost:8080/boat/5764017373052928",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/boat/5652720409116672",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
@@ -1815,8 +1822,8 @@
 		{
 			"name": "DELETE /slip/{slipid}",
 			"id": "4e0a7646-1ff2-41bb-b9c2-6d39c167a031",
-			"url": "localhost:8080/slip/5739238230327296",
-			"time": "2018-04-28T22:11:06.979Z",
+			"url": "https://restimplementation-202104.appspot.com/slip/5693417237512192",
+			"time": "2018-04-28T22:45:57.836Z",
 			"responseCode": {
 				"code": 202,
 				"name": "Accepted",
